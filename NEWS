@@ -1,0 +1,17 @@
+Version 0.3.0
+-------------------------------------------------------------------------
+*IP normalisation and conversion removed; use iptools
+*URL decoding removed; use urltools.
+*R user agent parsing removed; use uaparser
+
+Version 0.2.0
+-------------------------------------------------------------------------
+*Add an AWS log file reader, read_aws, at Hadley's suggestion.
+*Convert log readers to use readr's read_log, eliminating some complexity and R-side parsing
+*Documentation around split_* improved to make clear what happens with non-intact requests.
+*Add a prototype R user agent parser.
+*Add ip_to_numeric to convert human-readable IPv4s to numeric values.
+
+Version 0.1.0
+-------------------------------------------------------------------------
+*Initial release
