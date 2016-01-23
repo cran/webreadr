@@ -1,3 +1,20 @@
+Version 0.4.0
+-------------------------------------------------------------------------
+
+NEW FEATURES
+* Amazon S3 bucket access logs are now supported with read_s3(). Thanks to Hadley Wickham
+for the feature request.
+
+BUG FIXES
+* For consistency purposes, date-times will be POSIXct rather than occasionally POSIXlt
+
+DEVELOPMENT
+* Splitters are now approximately 40-60% faster and can better handle corrupted or strange fields.
+
+Version 0.3.1
+-------------------------------------------------------------------------
+*Internal tweaks matching the updated readr package.
+
 Version 0.3.0
 -------------------------------------------------------------------------
 *IP normalisation and conversion removed; use iptools

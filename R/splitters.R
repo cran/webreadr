@@ -1,7 +1,9 @@
 #'@title split requests from a CLF-formatted file
 #'@description CLF (Combined/Common Log Format) files store the HTTP method, protocol
 #'and asset requested in the same field. \code{split_clf} takes this field as a vector
-#'and returns a data.frame containing these elements in distinct columns.
+#'and returns a data.frame containing these elements in distinct columns. The function
+#'also works nicely with the \code{uri} field from Amazon S3 files (see
+#'\code{\link{read_s3}}).
 #'
 #'@param requests the "request" field from a CLF-formatted file, read in with
 #'\code{\link{read_clf}} or \code{\link{read_combined}}.
@@ -17,13 +19,17 @@
 #'in these files.
 #'
 #'@examples
-#'#Grab CLF data and split out the request.
+#'# Grab CLF data and split out the request.
 #'data <- read_combined(system.file("extdata/combined_log.clf", package = "webreadr"))
 #'requests <- split_clf(data$request)
+#'
+#'# An example using S3 files
+#'s3_data <- read_s3(system.file("extdata/s3.log", package = "webreadr"))
+#'s3_requests <- split_clf(s3_data$uri)
+#'
 #'@export
 split_clf <- function(requests){
-  internal_split(requests = strsplit(x = requests, split = " ", fixed = TRUE),
-                 names = c("method", "asset", "protocol"))
+  internal_split_clf(requests)
 }
 
 #'@title split the "status_code" field in a Squid-formatted dataset.
@@ -48,10 +54,9 @@ split_clf <- function(requests){
 #'@examples
 #'#Read in an example Squid file provided with the webtools package, then split out the codes
 #'data <- read_squid(system.file("extdata/log.squid", package = "webreadr"))
-#'status_splot <- split_squid(data$status_code)
+#'statuses <- split_squid(data$status_code)
 #'
 #'@export
 split_squid <- function(status_codes){
-  internal_split(requests = strsplit(x = status_codes, split = "/", fixed = TRUE),
-                 names = c("squid_code", "http_status"))
+  internal_split_squid(status_codes)
 }

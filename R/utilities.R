@@ -13,7 +13,7 @@ aws_header_select <- function(header_fields){
   collectors <- list(col_character(), col_character(), col_character(), col_integer(), col_character(),
                      col_character(), col_character(), col_character(), col_integer(), col_character(),
                      col_character(), col_character(), col_character(), col_character(), col_character(),
-                     col_character(), col_character(), col_character(), col_numeric())
+                     col_character(), col_character(), col_character(), col_number())
   if(length(header_fields) == length(field_names) && all(header_fields == field_names)){
     return(list(new_names, collectors))
   }
@@ -29,4 +29,8 @@ aws_header_select <- function(header_fields){
     stop("Your file contains unrecognised fields")
   }
   return(list(out_names, out_collectors))
+}
+
+unix_to_posix <- function(ts){
+  return(as.POSIXct(ts, origin = '1970-01-01', tz = "UTC"))
 }
